@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    internal bool inWalls;
+
 
 
     // Start is called before the first frame update
@@ -54,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
     }
 
-        // Update is called once per frame
     void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
