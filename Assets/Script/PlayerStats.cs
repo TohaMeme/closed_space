@@ -73,7 +73,7 @@ public class PlayerStats : MonoBehaviour
     {
         airZoneCount = Mathf.Max(0, airZoneCount - 1);
         if (airZoneCount == 0)
-        {
+        {   
             float normalizedLoss = Mathf.Clamp01((maxOxygen - currentOxygen) / Mathf.Max(0.0001f, maxOxygen));
             float decay = oxygenEffect != null ? oxygenEffect.quickFadeSpeed : -1f;
             oxygenEffect?.SetTargetIntensity(normalizedLoss, decay);

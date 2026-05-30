@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AirTrigger : MonoBehaviour
 {
-    [Tooltip("¬ключить дл€ отладки входа/выхода из зоны")]
+    [Tooltip("ќтвечает за включение музыки/вывод в лог")]
     public bool debug = false;
 
     private void OnTriggerEnter(Collider other)
@@ -12,11 +12,18 @@ public class AirTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        // ”величиваем счетчик зон в AmbientMusicManager Ч музыка не прервЄтс€ при переходе между триггерами
+        AmbientMusicManager.Instance.EnterZone();
+
         PlayerStats ps = FindPlayerStats(other);
         if (ps != null)
         {
             ps.EnterAirZone();
             if (debug) Debug.Log($"[AirTrigger] Enter -> {ps.gameObject.name}");
+        }
+        else
+        {
+            if (debug) Debug.Log("[AirTrigger] Enter -> PlayerStats not found, AmbientMusicManager used directly");
         }
     }
 
@@ -25,11 +32,18 @@ public class AirTrigger : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
+        // ”меньшаем счетчик зон Ч музыка затухнет лишь когда счетчик станет 0
+        AmbientMusicManager.Instance.ExitZone();
+
         PlayerStats ps = FindPlayerStats(other);
         if (ps != null)
         {
             ps.ExitAirZone();
             if (debug) Debug.Log($"[AirTrigger] Exit -> {ps.gameObject.name}");
+        }
+        else
+        {
+            if (debug) Debug.Log("[AirTrigger] Exit -> PlayerStats not found, AmbientMusicManager used directly");
         }
     }
 
