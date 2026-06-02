@@ -22,6 +22,7 @@ public class Destroy : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+
     }
 }
